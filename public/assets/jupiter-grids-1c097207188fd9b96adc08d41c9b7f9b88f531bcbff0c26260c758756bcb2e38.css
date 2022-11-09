@@ -1,0 +1,30 @@
+@media print {
+	.header-spacer { height: 10px; }
+	.titlebar-spacer { height: 10px; }
+	.nav-spacer { height: 10px; }
+	.title h2 
+	{ 
+  font-size: 18px; font-weight: 600; letter-spacing: .02em; margin-top: 0px;
+  }
+	h3.card-title { font-size: 18px; }
+	h4.aqua-sub { font-size: 18px; }
+	br
+	{
+		content: "";
+		display: block;
+		margin-top: 3px;
+		margin-right: 0;
+	}
+	
+		.col-form-label, .col-sm-3, .col-sm-9, .view-control
+	{
+		display: inline;
+		font-size: 14px;
+		line-height: 1.25;
+	}
+  .table {
+    border-collapse: collapse !important;
+    font-size: 14px;
+  	padding: 2px;
+  }
+}

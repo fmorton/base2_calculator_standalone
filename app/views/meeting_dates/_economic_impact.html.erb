@@ -1,0 +1,184 @@
+<% @meeting_date = @calculation if @meeting_date.nil? -%>
+<% consolidate_local = (consolidate_local rescue false) -%>
+
+<% if (economic_impact rescue false) %>
+<div id='economic-impact-anchor' class='anchor'></div>
+  <% if view_fieldset_viewable("view_map.meeting_dates.economic_impact_input") %>
+    <%= view_fieldset_start("Economic Impact Input") %>
+			<% if !(@economics_calculator_mode) -%>
+			  <div style="padding: 0px 10px 15px 15px;">
+		      <%= link_to('Print External', "https://jupiter.visitindy.com/economics/#{@meeting_date.id.to_s}", :class => 'btn btn-primary', :target => '_blank') %>
+		      <%= link_to('Internal', "https://jupiter.visitindy.com//economics/#{@meeting_date.id.to_s}?external=false&internal=true", :class => 'btn btn-primary', :target => '_blank') %>
+		      <%= link_to('Both', "https://jupiter.visitindy.com//economics/#{@meeting_date.id.to_s}?internal=true", :class => 'btn btn-primary', :target => '_blank') %>
+		      <%= link_to('dpm.visitindy.com', dpm_uri(@organization, @meeting_date, @meeting_date_financial_commitment, @meeting_date_economic_impact), :class => 'btn btn-primary', :target => '_blank') %>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= apply_button("economic-impact-input-anchor", :class => 'btn btn-primary') %>
+			  </div>
+			<% end -%>
+    	<%= view_fieldset_column_start %>
+			  <% if params[:action] == 'edit' -%>
+					<% if   @economics_calculator_mode -%>
+	          <%= view_dollars "Economic Impact", @calculation.economic_impact %>
+					<% else -%>
+            <%= view_form_element "Attendance", view_convention_center_text_field_tag('economic_attendance', number_with_precision(economic_impact.economic_attendance, :precision => 0, :delimiter => ',')) %>
+					<% end -%>
+          <%= view_form_element "Percent Local Attendees", view_convention_center_text_field_tag('percent_local_attendees', economic_impact.percent_local_attendees.percentage_string) %>
+				<% else -%>
+					<% if   @economics_calculator_mode -%>
+	          <%= view_dollars "Economic Impact", @calculation.economic_impact %>
+					<% else -%>
+            <%= view_number "Attendance", economic_impact.economic_attendance %>
+					<% end -%>
+          <%= view_percentage "Percent Local Attendees", economic_impact.percent_local_attendees %>
+				<% end -%>
+    	<%= view_fieldset_next_column %>
+        <%= view_number "Estimated Attendee Days", economic_impact.attendance_nights %>
+        <%= view_decimal "Calculated People/Room", economic_impact.calculated_people_per_room %>
+				<% if !(  @economics_calculator_mode) -%>
+          <%= view_decimal "Calculated Average Rate", economic_impact.average_rate %>
+				<% end -%>
+        <%= view_number "Calculated Average Daily Attendance", economic_impact.average_nightly_attendance %>
+				<% if !(@economics_calculator_mode) -%>
+          <%= view_number "Calculated Total Square Footage", "#{economic_impact.calculated_gsf.number_with_commas} / #{economic_impact.calculated_gsf_all_space.number_with_commas}" %>
+				<% end -%>
+    	<%= view_fieldset_column_end %>
+    <%= view_fieldset_end %>
+  <% end -%>
+
+  <% if view_fieldset_viewable("view_map.meeting_dates.economic_impact_convention_center") %>
+	  <% normal_mode = (params[:controller] != 'calculations') -%>
+	  <% fieldset_title = (normal_mode ? "Economic Impact Convention Center" : "Economic Impact Facility Spending") -%>
+    <%= view_fieldset_start(fieldset_title) %>
+    	<%= view_fieldset_column_start_wide %>
+        <table class="table table-striped table-bordered table-condensed">
+        	<thead>
+						<tr>
+							<% if normal_mode -%>
+								<th>&nbsp;</th>
+								<th class="text-center">Standard Rate</th>
+							  <!-- <th class="text-center">CIB Discount</th> -->
+							  <!-- <th class="text-center">VI Assistance</th> -->
+							  <th class="text-center">Gross Revenue</th>
+							  <th class="text-center">Direct Cost</th>
+							  <th class="text-center">Net Revenue</th>
+								<th class="text-center" width="40%">Note</th>
+							<% else -%>
+								<th width="20%">&nbsp;</th>
+								<th class="text-center" width="15%">Standard Rate</th>
+								<th class="text-center" width="50%">Note</th>
+							<% end -%>
+						</tr>
+        	</thead>
+        	<tbody>
+        <%= hidden_field_tag('meeting_date[meeting_date_economic_impact_attributes][id]', economic_impact.id) -%>
+        <%= view_convention_center_economics(economic_impact, 'Space Rental', 'space_rental', normal_mode) %>
+        <%= view_convention_center_economics(economic_impact, 'Food and Beverage', 'food_and_beverage', normal_mode) %>
+        <%= view_convention_center_economics(economic_impact, 'Labor Reimbursement', 'labor_reimbursement', normal_mode) %>
+        <%= view_convention_center_economics(economic_impact, 'Utilities', 'utilities', normal_mode) %>
+        <%= view_convention_center_economics(economic_impact, 'Internet', 'internet', normal_mode) %>
+        <%= view_convention_center_economics(economic_impact, 'Equipment', 'equipment', normal_mode) %>
+        <%= view_convention_center_economics(economic_impact, 'Other', 'other', normal_mode) %>
+				<% if normal_mode -%>
+          <%= view_convention_center_economics(economic_impact, 'Direct Cost Adjustment', 'adjustment', normal_mode) %>
+          <%= view_convention_center_economics(economic_impact, 'Overhead', 'overhead', normal_mode) %>
+				<% end -%>
+        <%= view_convention_center_economics(economic_impact, 'Total', 'total', normal_mode) %>
+        </tbody>
+      </table>
+    	<%= view_fieldset_column_end %>
+      <%= view_fieldset_column_start_wide %>
+        <%= apply_button("economic-impact-convention-center-anchor", :class => 'btn btn-primary') %>
+      <%= view_fieldset_column_end %>
+    <%= view_fieldset_end %>
+  <% end -%>
+
+  <% if view_fieldset_viewable("view_map.meeting_dates.economic_visitor_spending") %>
+    <%= view_fieldset_start %>
+	  	<%= view_fieldset_column_start %>
+				<% if (defined?(f) ? f : nil) -%>
+	        <%= edit_array_select(f, "Spending Event Type", 'spending_event_type_id', @spending_event_types.get_verified_collection((@meeting_date.spending_event_type_id rescue 0)), :include_blank => '', :button => apply_button("economic-impact-anchor")) %>
+				<% else -%>
+	        <%= view_string "Spending Event Type", tagmap_cached_name(@meeting_date.spending_event_type_id) %>
+				<% end -%>
+	  	<%= view_fieldset_column_end %>
+    	<%= view_fieldset_column_start_wide %>
+        <table class="table table-striped table-bordered table-condensed">
+        	<thead>
+						<tr>
+							<th class="text-center">&nbsp;</th>
+							<th class="text-center">Spending</th>
+							<th class="text-center">Per Attendee</th>
+							<th class="text-center">Adjustment&nbsp;(%)</th>
+							<th class="text-center" width="50%">Explanation</th>
+						</tr>
+        	</thead>
+        	<tbody>
+	          <%= view_economics_spending(@meeting_date, economic_impact, "Air Traffic", "spending_air_traffic") %>
+	          <%= view_economics_spending(@meeting_date, economic_impact, "Ground Transportation", "spending_ground_transportation") %>
+	          <%= view_economics_spending(@meeting_date, economic_impact, "Food", "spending_food") %>
+	          <%= view_economics_spending(@meeting_date, economic_impact, "Room", "spending_room") %>
+	          <%= view_economics_spending(@meeting_date, economic_impact, "Shopping", "spending_shopping") %>
+	          <%= view_economics_spending(@meeting_date, economic_impact, "Entertainment", "spending_entertainment") %>
+	          <!-- < %= view_economics_spending(@meeting_date, economic_impact, "Other", "spending_other") % > -->
+	          <%= view_economics_spending(@meeting_date, economic_impact, "Total Visitor Spending", "total_spending") %>
+        	</tbody>
+        </table>
+    	<%= view_fieldset_column_end %>
+    <%= view_fieldset_end %>
+  <% end -%>
+
+  <% if view_fieldset_viewable("view_map.meeting_dates.economic_tax_calculations") %>
+    <%= view_fieldset_start %>
+    	<%= view_fieldset_column_start_wide %>
+        <table class="table table-striped table-bordered table-condensed">
+        	<thead>
+						<tr>
+							<th class="text-center">Tax</th>
+					    <% if !consolidate_local -%>
+							  <th class="text-center">CIB Debt</th>
+							  <th class="text-center">CIB Operations</th>
+							  <th class="text-center">ISCBA</th>
+							<% end -%>
+							<th class="text-center">Local</th>
+							<th class="text-center">State</th>
+							<th class="text-center">Federal</th>
+							<th class="text-center">Total</th>
+						</tr>
+        	</thead>
+        	<tbody>
+        <% [ 2,3,9,4,5,6,7,8,10,11,12,13,14,15,16 ].each do |index| -%>
+          <% next if (description = (economic_impact.send("tax_#{index}_label") rescue nil)).blank? -%>
+				<tr>
+					<td><%= description %></td>
+					<% if consolidate_local -%>
+					  <td class="text-right"><%= consolidated_tax_calculation(economic_impact, index, "").dollars_with_commas %></td>
+					<% else -%>
+					  <td class="text-right"><%= (economic_impact.send("tax_#{index}_entity_1_debt").dollars_with_commas rescue nil) %></td>
+					  <td class="text-right"><%= (economic_impact.send("tax_#{index}_entity_1_operations").dollars_with_commas rescue nil) %></td>
+					  <td class="text-right"><%= (economic_impact.send("tax_#{index}_entity_2").dollars_with_commas rescue nil) %></td>
+					  <td class="text-right"><%= (economic_impact.send("tax_#{index}_local").dollars_with_commas rescue nil) %></td>
+					<% end -%>
+					<td class="text-right"><%= (economic_impact.send("tax_#{index}_state").dollars_with_commas rescue nil) %></td>
+					<td class="text-right"><%= (economic_impact.send("tax_#{index}_federal").dollars_with_commas rescue nil) %></td>
+					<td class="text-right"><%= (economic_impact.send("tax_#{index}_total").dollars_with_commas rescue nil) %></td>
+				</tr>
+        <% end -%>
+        <tr>
+          <td><strong>Total</strong></td>
+					<% if consolidate_local -%>
+					  <td class="text-right"><%= consolidated_tax_calculation(economic_impact, 0, "total_").dollars_with_commas %></td>
+					<% else -%>
+	          <td class="text-right"><%= (economic_impact.send("total_tax_entity_1_debt").dollars_with_commas rescue nil) %></td>
+	          <td class="text-right"><%= (economic_impact.send("total_tax_entity_1_operations").dollars_with_commas rescue nil) %></td>
+	          <td class="text-right"><%= (economic_impact.send("total_tax_entity_2").dollars_with_commas rescue nil) %></td>
+	          <td class="text-right"><%= (economic_impact.send("total_tax_local").dollars_with_commas rescue nil) %></td>
+					<% end -%>
+	        <td class="text-right"><%= (economic_impact.send("total_tax_state").dollars_with_commas rescue nil) %></td>
+	        <td class="text-right"><%= (economic_impact.send("total_tax_federal").dollars_with_commas rescue nil) %></td>
+	        <td class="text-right"><%= (economic_impact.send("total_tax").dollars_with_commas rescue nil) %></td>
+        </tr>
+			</tbody>
+		</table>
+    	<%= view_fieldset_column_end %>
+    <%= view_fieldset_end %>
+  <% end -%>
+<% end %>

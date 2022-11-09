@@ -1,0 +1,107 @@
+body { font-size: 12px; line-height: 18px; letter-spacing: .01em; 	padding: 20px; }
+
+hr { margin: 10px 0; }
+
+.name-title {color: #000; font-weight: 600; font-size: 14px; margin: 0px 5px 0 0;}
+.item-center { margin: 0px auto 0px auto; }
+
+ul.inline-seondary > li { display: inline-block; padding-left: 15px; padding-right: 15px; line-height: 16px; font-size: 16px; font-weight: bold; }
+p.subtext { padding-right: 20px; font-size: 16px; font-weight: bold; }
+
+header { line-height: 23px; font-size: 20.5px; font-weight: bold; margin-bottom: 5px; }
+
+.ui-autocomplete { position: absolute; cursor: default; font-size: 12px; font-weight: normal; border: 1px #E7E6E6 solid; background-color: #FFFFFF; padding-top: 3px; padding-left: 15px; text-align: left; list-style-type: none; list-style-position: inside; }
+.ui-helper-hidden-accessible { display:none; }
+
+.btn { border-radius: 0rem; font-size: .9rem; }
+.form-control { font-size: .9rem; border-radius: 0rem; }
+.section-panel { color: #FFF; border: 1px solid #d1d3d4; margin-bottom: 20px; padding: 6px 10px 6px 10px; }
+
+.hide { display: none !important; }
+.status-link { cursor: pointer; }
+
+.section-title { color: #FFF; margin: 0; }
+.section-title h3 { font-size: 18px; line-height: 25px; padding: 3px 10px 3px 10px; font-weight: normal; }
+.section-title h4 { font-size: 16px; line-height: 25px; padding: 3px 10px 3px 10px; font-weight: normal; text-align: left; }
+.section-title h5 { font-size: 14px; line-height: 14px; padding: 0px; font-weight: bold; color: #004b8b; text-align: left; margin: 0px 0px 10px 0px; }
+
+
+.primary-bkg { background-color: #004b8b; }
+.primarylite-bkg { background-color: #e5f5f9; }
+.primary { color: #004b8b; }
+.secondary-bkg { background-color: #8ec63f; }
+.tertiary-bkg { background-color: #d4b318; }
+.sports-primary-bkg { background-color: #15325c; }
+.sports-secondary-bkg { background-color: #8dc63f; }
+.sports-tertiary-bkg { background-color: #d4b318; }
+
+.beige-bkg { background-color: #fbf9e5; }
+
+
+.section1,.section2,.section3 { margin: 20px 20px 0px 20px; }
+.section1 th,.section2 th,.section3 th, .section4 th { background-color:#b2c9dc; }
+.section4 h3 { font-size: 24px; }
+
+.tableplain th, .tableplain td { line-height: 20px; text-align: left; vertical-align: top; border-top: 0px solid #dddddd; }
+.table-condensed td, .table-condensed th { padding: 5px 3px; }
+.table-condensed th { text-align: center; }
+.table-condensed td { text-align: right; }
+.table-condensed td.leftText { text-align: left; }
+.table-condensed td.object-center { text-align: center; }
+.table-condensed td.object-left { text-align: left; }
+
+.leftText { text-align: left; }
+
+.form-inline { margin-bottom: 0px; }
+.form-inline input, .form-inline submit, .form-inline select { margin-right: 4px; }
+
+td.header-title { text-align: left; font-size: 16px; font-weight: bold; color: #FFF; padding-left: 15px; line-height: 30px; }
+td.header-subtitle { text-align: center; font-size: 14px; font-weight: bold; color: #004b8b; padding-left: 14px; line-height: 25px; }
+
+td.rt, th.rt, col.rt { text-align: right; }
+
+.line_chart { float: left; width: 295px; height: 250px; margin: 5px 0px 5px 5px; padding: 0; border: 0px #000 solid; background-color: Transparent; }
+
+/* CONVENTION SQUARE */
+.parent-square-small { width: 28px; list-style: none; }
+.child-square-small { float: left; width: 7px; height: 7px; }
+.parent-square-large { width: 500px; }
+.child-square-large { float: left; width: 125px; height: 125px; color: white; text-align: center; font-size: 14px; font-weight: 600; padding-top: 1.5rem !important; }
+.square-key { float: left; width: 12px; height: 12px;}
+.key { font-size: 13px; background-color: #ECECEC; border: 1px #666666 solid; display: inline; }
+
+/* Popover */
+.popover { max-width: 100%; font-size: 11px; }
+.popover-title { background-color: #004b8b; }
+
+.form-actions { padding: 15px 20px 0px 20px; margin-top: 0px; margin-bottom: 0px; *zoom: 1; }
+
+input, button, select, textarea {font-size: .9rem; line-height: 16px; font-weight: normal; }
+
+[class^="icon-"],
+[class*=" icon-"] {
+  background-image: url(/assets/base2_cms/icons/glyphicons-halflings.png);
+}
+/* White icons with optional class, or on hover/active states of certain elements */
+.icon-white,
+.nav-pills > .active > a > [class^="icon-"],
+.nav-pills > .active > a > [class*=" icon-"],
+.nav-list > .active > a > [class^="icon-"],
+.nav-list > .active > a > [class*=" icon-"],
+.navbar-inverse .nav > .active > a > [class^="icon-"],
+.navbar-inverse .nav > .active > a > [class*=" icon-"],
+.dropdown-menu > li > a:hover > [class^="icon-"],
+.dropdown-menu > li > a:hover > [class*=" icon-"],
+.dropdown-menu > .active > a > [class^="icon-"],
+.dropdown-menu > .active > a > [class*=" icon-"],
+.dropdown-submenu:hover > a > [class^="icon-"],
+.dropdown-submenu:hover > a > [class*=" icon-"] {
+  background-image: url(/assets/base2_cms/icons/glyphicons-halflings-white.png);
+}
+
+label { font-size: 12px; font-weight: normal; }
+
+textarea { height: auto; }
+
+.economics_popover { cursor: pointer; }
+input.spacer { margin-bottom: 5px; }

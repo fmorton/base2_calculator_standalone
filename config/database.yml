@@ -1,0 +1,43 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: base2_brains_development
+  pool: 5
+  host: <%= (Socket.gethostname.index('base2inc.not.used') ? 'db.base2inc.com' : 'localhost') %>
+  username: postgres
+  password:
+  port: 5432
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: base2_brains_test
+  pool: 5
+  host: localhost
+  username: postgres
+  password:
+  port: 5432
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: base2_brains_production
+  pool: 50
+  host: localhost
+  username: postgres
+  password:
+  port: 5432
+
+temporary:
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: base2_brains_temporary
+  pool: 5
+  host: localhost
+  username: postgres
+  password:
+  port: 5432

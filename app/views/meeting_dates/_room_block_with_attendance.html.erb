@@ -1,0 +1,17 @@
+<%
+meeting_date = @meeting_date
+meeting_date = @calculation if meeting_date.nil?
+
+locals = {}
+locals[:f] = (defined?(f) ? f : nil)
+locals[:meeting_date] = meeting_date
+locals[:description] = 'Room Block'
+locals[:room_block_string] = meeting_date.room_block_string
+locals[:date_property_name_prefixes] = [ 'housing_1_at', 'housing_2_at', 'housing_3_at' ]
+locals[:attendance_property_name_prefix] = 'attendance'
+locals[:attendance_description] = 'Attendance'
+locals[:attendance_string] = meeting_date.attendance_string
+locals[:flexible_dates] = (flexible_dates rescue false)
+%>
+
+<%= render :partial => 'meeting_dates/room_block', :locals => locals -%>

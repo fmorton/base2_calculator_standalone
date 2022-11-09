@@ -1,0 +1,31 @@
+<% if can_see?(@active_navigation) -%>
+  <%= index_start(@active_navigation, @calculations, 7) %>
+    <th width="1%" nowrap class="text-center">&nbsp;</th>
+    <th width="20%"><%= index_head(:organization_name) %></th>
+    <th width="20%" nowrap class="text-center"><%= index_head(:name, "#{event_or_meeting} Name") %></th>
+    <th width="5%" nowrap class="text-center"><%= index_head(:meeting_1_at, "#{event_or_meeting} Date") %></th>
+    <th width="20%" nowrap class="text-center"><%= index_head(:host_city_name, 'Host City') %></th>
+    <th width="5%" nowrap class="text-center"><%= index_head(:meeting_status_id, 'Status') %></th>
+    <th width="5%" nowrap class="text-center"><%= index_head(:economic_impact, 'Economic Impact') %></th>
+    <th width="5%" nowrap class="text-center"><%= index_head(:attendance, 'Attendance') %></th>
+    <th width="3%" nowrap class="text-center"><%= index_head(:shared, 'Shared') %></th>
+    <th width="5%" nowrap class="text-center"><%= index_head(:created_at, 'Date Created') %></th>
+  <%= index_middle(@active_navigation, @calculations) %>
+    <% for calculation in @calculations -%>
+      <%= index_body_element_start(@active_navigation, calculation, edit_calculation_path(calculation)) %>
+        <td class="text-center"><%= link_to(image_tag(StaticAsset.pie_chart, :width => 18), "/calculations_view/#{calculation.id.to_s}", :target => '_blank') %></td>
+        <td><%= index_link_to(@active_navigation, calculation.id, "#{calculation.organization_name}", :empty_description => "No Organization Assigned") %></td>
+        <td><%= index_link_to(@active_navigation, calculation.id, "#{calculation.name}") %></td>
+        <td class="text-center"><%= standard_date(calculation.meeting_1_at) %></td>
+        <td class="text-left"><%= host_city_name(calculation) %></td>
+        <td class="text-center"><%= (raw(calculation.status_string.gsub(' ', '&nbsp;')) rescue '') %></td>
+        <td class="text-center"><%= dollars(calculation.economic_impact) %></td>
+        <td class="text-center"><%= with_commas(calculation.peak_attendance) %></td>
+        <td class="text-center"><%= calculation.shared.yes_or_no %></td>
+        <td class="text-center"><%= standard_date(calculation.created_at) %></td>
+      <%= index_body_element_end(@active_navigation, calculation) %>
+    <% end -%>
+  <%= index_end(@calculations) %>
+<% else -%>
+  <%= no_access -%>
+<% end -%>

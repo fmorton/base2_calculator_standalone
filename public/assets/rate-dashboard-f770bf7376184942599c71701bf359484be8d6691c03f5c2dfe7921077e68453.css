@@ -1,0 +1,40 @@
+/*--- DEFAULTS ---*/
+* { outline: 0; }
+img, a img { border: 0; }
+
+a:link, a:visited { color: #24526f; cursor: pointer; text-decoration: none; }
+a:hover, a:active { cursor: pointer; text-decoration: underline; }
+
+
+.clear { width: 100%; clear: both; padding-top: 15px; }
+	
+body { font-family: 'Helvetica Neue', Arial, Verdana, sans-serif; font-size: 11px; color: #666; background-color: #1C455F; padding: 45px; background-image: url(/assets/base2_cvb/rate/dashboard-bkg.png); background-repeat: repeat-x; }
+
+/*--- COMMON STRUCTURE ---*/
+
+#container { border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; -khtml-border-radius: 5px; width: 100%; background-color: #FFFFFF; }
+#header { width: 100%; padding: 20px 0px 5px 0px; }
+
+#icons { border-top: 2px #666666 solid; margin: 0px 15px 0px 15px; padding: 15px 0px 0px 10px; }
+#icons div.toptip { padding: 6px; height: 55px; float: left; }
+
+
+/* MUST tooltip styling */
+.hide {position:absolute; z-index:800; left:-9999px;}
+
+/* general tooltip styling */
+.hide { border: 2px solid #1C455F; padding: 5px 10px; background: #faf1b8; text-align: left; max-width: 350px; }
+.hide p {color: #000; margin:0; font-family:arial, sans-serif; font-size:13px; line-height:1.5em;}
+.hide h3 { color: #000000; padding: 5px 0; margin: 0; font-family: arial, sans-serif; font-size: 14px; line-height: 1.5em; font-weight: bold; }
+
+
+/*--- COMMON FORMAT--*/
+
+h1 { margin: 0px 30px 10px 30px; font-size: 20px; }
+
+span { font-size: 16px; }
+span a:link, span a:visited { color: #666; cursor: pointer; text-decoration: none; }
+span a:hover, span a:active { cursor: pointer; text-decoration: underline; }
+
+div.legal { color: #FFF; padding: 0px 0px 5px 15px; font-size: 12px; margin-top: 10px; }
+div.legal a { color: #FFF; }

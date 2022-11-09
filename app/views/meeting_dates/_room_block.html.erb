@@ -1,0 +1,30 @@
+<% row_size = 11 -%>
+<% room_block_as_integer = room_block_string.split(':').collect { |o| o.to_i } rescue [] -%>
+<% peak_rooms = room_block_as_integer.max -%>
+<% room_block_array = room_block_as_integer.each_slice(row_size).to_a -%>
+
+<% attendance_as_integer = attendance_string.split(':').collect { |o| o.to_i } rescue [] -%>
+<% attendance_array = attendance_as_integer.each_slice(row_size).to_a -%>
+
+<% room_block_array.each_with_index do |row, index| -%>
+<div class='table-responsive'>
+<table class='table-width table-striped table-bordered table-condensed'>
+	<thead>
+  	<tr>
+      <th>&nbsp;</th>
+      <% (0..(row.size - 1)).each do |date_offset| -%>
+        <%= room_flow_header(meeting_date, date_property_name_prefixes, ((index * row_size) + date_offset)) %>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <%= room_flow_percentages(row, peak_rooms) %>
+    <%= room_flow_count((defined?(f) ? f : nil), description, row, peak_rooms, date_property_name_prefixes[0].before('_at').gsub('_1', ''), (index * row_size)) %>
+		<% if (attendance_property_name_prefix rescue false) -%>
+      <%= room_flow_count((defined?(f) ? f : nil), attendance_description, attendance_array[index], peak_rooms, attendance_property_name_prefix, (index * row_size), row.size) %>
+		<% end -%>
+  </tbody>
+</table>
+</div>
+<% end -%>
+

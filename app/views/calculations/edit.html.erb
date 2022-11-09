@@ -1,0 +1,7 @@
+<% if @calculation.locked_data_source? -%>
+  <%= render :partial => 'shared/locked_data_source' %>
+<% else -%>
+  <%= edit_fieldset_page_start(@active_navigation, @calculation, :name, calculations_path, @calculation) %>
+    <%= render :partial => 'form', :object => @calculation, :locals => { :edit => true } %>
+  <%= edit_fieldset_page_end %>
+<% end -%>

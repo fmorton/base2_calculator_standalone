@@ -1,0 +1,268 @@
+  <% unless @meeting_date.nil? %>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <!--[if lt IE 8]>< %= javascript_include_tag "excanvas.js" % ><![endif]-->
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Category');
+        data.addColumn('number', 'Amount');
+        data.addRows([
+          <%= economics_data('Local Taxes', (@meeting_date_economic_impact.total_tax_local rescue '')) %>,
+          <%= economics_data('State Taxes', (@meeting_date_economic_impact.total_tax_state rescue '')) %>,
+          <%= economics_data('Federal Taxes', (@meeting_date_economic_impact.total_tax_federal rescue '')) %>
+        ]);
+        var chart = new google.visualization.PieChart(document.getElementById('chart_pie'));
+        chart.draw(data, {
+          chartArea: {left:10,top:50, width: 300, height: 180},
+          width: 285, 
+          height: 210, 
+          legend: 'right', 
+          is3D: 'true'
+        });
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Category');
+        data.addColumn('number', 'Amount');
+        data.addRows([
+          <%= economics_data('Space Rental', (@meeting_date_economic_impact.cc_space_rental_standard_rate rescue '')) %>,
+          <%= economics_data('Food & Beverage', (@meeting_date_economic_impact.cc_food_and_beverage_standard_rate rescue '')) %>,
+          <%= economics_data('Labor', (@meeting_date_economic_impact.cc_labor_reimbursement_standard_rate rescue '')) %>,
+          <%= economics_data('Utilities', (@meeting_date_economic_impact.cc_utilities_standard_rate rescue '')) %>,
+          <%= economics_data('Internet', (@meeting_date_economic_impact.cc_internet_standard_rate rescue '')) %>,
+          <%= economics_data('Equipment', (@meeting_date_economic_impact.cc_equipment_standard_rate rescue '')) %>,
+          <%= economics_data('Other', (@meeting_date_economic_impact.cc_other_standard_rate rescue '')) %>
+        ]);
+        var chart = new google.visualization.PieChart(document.getElementById('pie01'));
+        chart.draw(data, {
+          chartArea: {left:50,top:0, width: 300, height: 300},
+          width: 400, 
+          height: 210, 
+          legend: 'right', 
+          is3D: 'true'
+        });
+      }
+    </script>
+
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Year');
+        data.addColumn('number', 'Spending');
+        data.addRows([
+          <%= economics_data('Air', economics_spending_per_attendee(@meeting_date, @meeting_date_economic_impact, :spending_air_traffic)) %>,
+          <%= economics_data('Ground', economics_spending_per_attendee(@meeting_date, @meeting_date_economic_impact, :spending_ground_transportation)) %>,
+          <%= economics_data('Food', economics_spending_per_attendee(@meeting_date, @meeting_date_economic_impact, :spending_food)) %>,
+          <%= economics_data('Room', economics_spending_per_attendee(@meeting_date, @meeting_date_economic_impact, :spending_room)) %>,
+          <%= economics_data('Shopping', economics_spending_per_attendee(@meeting_date, @meeting_date_economic_impact, :spending_shopping)) %>,
+          <%= economics_data('Enter.', economics_spending_per_attendee(@meeting_date, @meeting_date_economic_impact, :spending_entertainment)) %>
+        ]);
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_bar'));
+        chart.draw(data, {
+          chartArea: {left:60,top:5, width: 420, height: 150},
+          width: 420, 
+          height: 180,
+          vAxis: {title: '$ Dollars', titleTextStyle: {color: 'blue', fontName: 'verdana', fontSize: 14}}
+          });
+      }
+    </script>
+  <% end %>
+
+  <div class="row">
+  	<div class="col-sm-12">
+			<header class="text-center">
+				<% if @organization.not_nil? -%>
+				  <%= (@organization.name rescue "Unknown Organization") %> &mdash;
+				<% end -%>
+				<%= @meeting_date.name %><br />
+				<% unless @report_host_city.blank? -%>
+				<%= @report_host_city %><br />
+				<% end -%>
+				<%= date_range_string([ @meeting_date.meeting_1_at, @meeting_date.meeting_2_at, @meeting_date.meeting_3_at ], @meeting_date.meeting_day_count) %><br />
+			</header>
+			<ul class="inline-seondary text-center">
+				<%= calculations_view_event_category(@meeting_date) %>
+				<li>Estimated Peak Attendance: <%= economics_number(@meeting_date.peak_attendance, true) %><% if @meeting_date.meeting_day_count > 0 %> in <%= @meeting_date.meeting_day_count.to_s %> days<% end %></li>
+				<li>Estimated Attendee Days: <%= economics_number((@meeting_date_economic_impact.attendance_nights rescue 0)) %></li>
+				<!-- <li>Estimated Attendance: <%= economics_number((@meeting_date.total_attendance.to_i rescue 0)) %><% if @meeting_date.meeting_day_count > 0 %> in <%= @meeting_date.meeting_day_count.to_s %> days<% end %></li> -->
+		    <!-- <li>Room-Nights: <%= economics_number(@meeting_date.total_room_nights_blocked) %></li> -->
+			</ul>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="section-title sports-secondary-bkg">  
+				<h3>Estimated Visitor Spending Per Attendee: <span class="float-right"><%= economics_dollars(economics_spending_per_attendee(@meeting_date, @meeting_date_economic_impact, :total_spending)) %>/day</span></h3>
+			</div>
+			<div class="section1">
+			<table class="table table-bordered table-condensed">
+				<thead>
+					<tr>
+						<th>Category</th>
+						<th>Assumptions</th>
+						<th><b>Visitor Spending</b></th>
+					</tr>
+				</thead>
+				<tbody>
+				  <%= calculations_view_estimated_visitor_spending(@meeting_date_economic_impact, "air traffic", "air_traffic") %>
+				  <%= calculations_view_estimated_visitor_spending(@meeting_date_economic_impact, "ground transportation", "ground_transportation") %>
+				  <%= calculations_view_estimated_visitor_spending(@meeting_date_economic_impact, "food", "food") %>
+				  <%= calculations_view_estimated_visitor_spending(@meeting_date_economic_impact, "room", "room") %>
+				  <%= calculations_view_estimated_visitor_spending(@meeting_date_economic_impact, "shopping", "shopping") %>
+				  <%= calculations_view_estimated_visitor_spending(@meeting_date_economic_impact, "entertainment", "entertainment") %>
+					<tr>
+						<td class='leftText'><b>total</b></td>
+						<td><b>&ndash;&nbsp;&nbsp;</b></td>
+						<td><b><%= economics_dollars((@meeting_date_economic_impact.total_spending rescue 0)) %></b></td>
+					</tr>
+				</tbody>
+			</table>
+			<br />
+			<br />
+			<div id="chart_bar"></div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="section-title sports-secondary-bkg">  
+				<h3>Facility Spending <span class="float-right"><%= @meeting_date_economic_impact.cc_total_standard_rate.dollars_with_commas('', 0) %></span></h3>
+			</div>
+			<div class="section1">
+				<table class="table table-bordered table-condensed">
+					<col style="background-color:#fff;" />
+					<col style="background-color:#e5f5f9;" />
+					<thead>
+						<tr>
+							<th></th>
+							<th>Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%= calculations_view_facility_spending(@meeting_date_economic_impact, "space rental", "space_rental") %>
+						<%= calculations_view_facility_spending(@meeting_date_economic_impact, "food and beverage", "food_and_beverage") %>
+						<%= calculations_view_facility_spending(@meeting_date_economic_impact, "labor reimbursement", "labor_reimbursement") %>
+						<%= calculations_view_facility_spending(@meeting_date_economic_impact, "utilities", "utilities") %>
+						<%= calculations_view_facility_spending(@meeting_date_economic_impact, "internet", "internet") %>
+						<%= calculations_view_facility_spending(@meeting_date_economic_impact, "equipment", "equipment") %>
+						<%= calculations_view_facility_spending(@meeting_date_economic_impact, "other", "other") %>
+						<%= calculations_view_facility_spending(@meeting_date_economic_impact, "total", "total", :bold => true) %>
+					</tbody>
+				</table>
+	
+    		<div id="pie01"></div>
+			</div>
+		</div>
+	</div>
+
+  <div class="row">
+  	<div class="col-sm-12">
+			<div class="section-title sports-primary-bkg">  
+				<h3>Estimated Economic Impact: <span class="float-right"><%= economics_dollars(@meeting_date_economic_impact.total_impact_with_induced_va) %></span></h3>
+			</div>
+
+		  <div class="section1">
+				<table class="table table-bordered table-condensed">
+					<thead>
+						<tr>
+							<th style='width: 25%;'></th>
+							<th style='width: 25%;'>Economic Impact</th>
+							<th style='width: 25%;'>Wages</th>
+							<th style='width: 25%;'>Jobs</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class='leftText'>direct</td>
+							<td style='text-align: center;'><%= economics_dollars((@meeting_date_economic_impact.total_impact_direct_va rescue 0)) %></td>
+							<td style='text-align: center;'><%= economics_dollars((@meeting_date_economic_impact.total_impact_direct_wages rescue 0)) %></td>
+							<td style='text-align: center;'><%= economics_decimal((@meeting_date_economic_impact.total_impact_direct_jobs rescue 0), 1) %></td>
+						</tr>
+						<tr>
+							<td class='leftText'>indirect</td>
+							<td style='text-align: center;'><%= economics_dollars((@meeting_date_economic_impact.total_impact_indirect_va rescue 0)) %></td>
+							<td style='text-align: center;'><%= economics_dollars((@meeting_date_economic_impact.total_impact_indirect_wages rescue 0)) %></td>
+							<td style='text-align: center;'><%= economics_decimal((@meeting_date_economic_impact.total_impact_indirect_jobs rescue 0), 1) %></td>
+						</tr>
+						<tr>
+							<td class='leftText'>induced</td>
+							<td style='text-align: center;'><%= economics_dollars((@meeting_date_economic_impact.total_impact_induced_va rescue 0)) %></td>
+							<td style='text-align: center;'><%= economics_dollars((@meeting_date_economic_impact.total_impact_induced_wages rescue 0)) %></td>
+							<td style='text-align: center;'><%= economics_decimal((@meeting_date_economic_impact.total_impact_induced_jobs rescue 0), 1) %></td>
+						</tr>
+						<tr>
+							<td class='leftText'><strong>total</strong></td>
+							<td style='text-align: center;'><strong><%= economics_dollars((@meeting_date_economic_impact.total_impact_with_induced_va rescue 0)) %></strong></td>
+							<td style='text-align: center;'><strong><%= economics_dollars(((@meeting_date_economic_impact.total_impact_with_induced_wages) rescue 0)) %></strong></td>
+							<td style='text-align: center;'><strong><%= economics_decimal(((@meeting_date_economic_impact.total_impact_with_induced_jobs) rescue 0), 1) %></strong></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+  <div class="row">
+  	<div class="col-sm-12">
+			<div class="section-title sports-tertiary-bkg">  
+				<h3>Estimated Tax Revenue: <span class="float-right"><%= economics_dollars((@meeting_date_economic_impact.total_tax rescue 0.0)) %></span></h3>
+			</div>
+		</div>
+	</div>
+
+  <div class="row">
+  	<div class="col-sm-12">
+		  <div class="section2">
+				<div class="col-sm-4">
+  				<div id="chart_pie"></div>  
+				</div>
+				<div class="col-sm-8">
+					<table class="table table-bordered table-condensed">
+						<col style="background-color:#fff" />
+						<col style="background-color:#eaeffa" />
+						<col style="background-color:#fbebe7" />
+						<col style="background-color:#fff5e5" />
+						<col style="background-color:#e7f4e7" />
+						<thead>
+							<tr>
+								<th></th>
+								<!-- <th>Hospitality Taxes</th> -->
+								<th>Local Taxes</th>
+								<th>State Taxes</th>
+								<th>Federal Taxes</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%= calculations_view_estimated_tax_revenue(@meeting_date_economic_impact, 1) %>
+							<%= calculations_view_estimated_tax_revenue(@meeting_date_economic_impact, 2) %>
+							<%= calculations_view_estimated_tax_revenue(@meeting_date_economic_impact, 3) %>
+							<%= calculations_view_estimated_tax_revenue(@meeting_date_economic_impact, 9) %>
+							<%= calculations_view_estimated_tax_revenue(@meeting_date_economic_impact, 4) %>
+							<%= calculations_view_estimated_tax_revenue(@meeting_date_economic_impact, 5) %>
+							<%= calculations_view_estimated_tax_revenue(@meeting_date_economic_impact, 6) %>
+							<%= calculations_view_estimated_tax_revenue(@meeting_date_economic_impact, 8) %>
+							<%= calculations_view_estimated_tax_revenue(@meeting_date_economic_impact, 10) %>
+							<%= calculations_view_estimated_tax_revenue(@meeting_date_economic_impact, 11) %>
+							<%= calculations_view_estimated_tax_revenue(@meeting_date_economic_impact, 0, 'total_', :bold => true) %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<hr />
+<footer>
+	<img src="<%= @report_logo_uri %>" alt="Economic Calculator" height="84" />
+	<div class="float-right"><%= raw(@report_footer) %></div>
+</footer>

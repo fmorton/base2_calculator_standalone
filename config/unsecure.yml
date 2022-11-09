@@ -1,0 +1,92 @@
+reset_password:
+  subject: 'Economics Calculator Reset Password'
+  label: reset_password
+  from: no_reply@economicscalculator.com
+
+ask_a_question:
+  subject: 'Ask a question from visitindy.com'
+  to: 'fmorton@base2inc.com,askaquestion@visitindy.com'
+  label: ask_a_question
+
+feedback:
+  subject: 'Feedback from visitindy.com'
+  to: 'jrobinson@visitindy.com,fmorton@base2inc.com,solutions@pranger.com'
+  label: feedback
+
+visitor_guide:
+  subject: 'Request a Visitor Guide or Other Visitor Information'
+  to: 'fmorton@base2inc.com,visitor@visitindy.com,askindy@visitindy.com'
+  label: visitor_guide
+
+bring_it_home:
+  subject: 'Bring it Home Request'
+  to: 'fmorton@base2inc.com,lfry@visitindy.com,lneal@visitindy.com,jrobinson@visitindy.com'
+  label: bring_it_home
+
+after_five:
+  to_development: 'fmorton@base2inc.com'
+  to_production: 'fmorton@base2inc.com,dwhitsitt@visitindy.com'
+  label: after_five
+
+expedia_problem:
+  subject: 'Expedia booking problem'
+  from: 'problem@visitindy.com'
+  to: 'fmorton@base2inc.com'
+  label: expedia_problem
+
+group_travel_request:
+  subject: 'Group Travel Request Assistance from visitindy.com'
+  to: 'fmorton@base2inc.com,solutions@pranger.com,sjohnson@visitindy.com'
+  label: group_travel_request
+
+group_travel_rfp:
+  subject: 'Group Travel Upload RFP Request from visitindy.com'
+  to: 'fmorton@base2inc.com,solutions@pranger.com,sjohnson@visitindy.com'
+  label: group_travel_rfp
+
+group_travel_upload_rfp:
+  subject: 'Group Travel On-line RFP Request from visitindy.com'
+  to: 'fmorton@base2inc.com,solutions@pranger.com,sjohnson@visitindy.com'
+  label: group_travel_upload_rfp
+
+planner_contact:
+  subject: 'Planner contact from visitindy.com'
+  to: 'fmorton@base2inc.com,dwhitsitt@visitindy.com'
+
+planner_rfp:
+  subject: 'On-line RFP request from visitindy.com'
+  to: 'fmorton@base2inc.com,dwhitsitt@visitindy.com'
+
+planner_upload_rfp:
+  subject: 'Uploaded RFP request from visitindy.com'
+  to: 'fmorton@base2inc.com,dwhitsitt@visitindy.com'
+
+coupon_request:
+  subject: 'Coupon Request for visitindy.com'
+  to: 'fmorton@base2inc.com,lneal@visitindy.com,solutions@pranger.com,bbutz@visitindy.com'
+
+contest_watch_answer_win:
+  subject: 'Watch. Answer. Win.'
+  to: 'fmorton@base2inc.com,dwhitsitt@visitindy.com,lneal@visitindy.com,solutions@pranger.com'
+
+summer_campaign:
+  subject: 'Summer Campaign Request'
+  to: 'cbeyer@visitindy.com,fmorton@base2inc.com,jwallis@visitindy.com'
+
+accounting:
+  subject: 'MAS100 Transaction Report'
+  to: 'fmorton@base2inc.com,jwallis@visitindy.com,jwright@visitindy.com'
+
+partnership_coupon:
+  subject: 'Partnership Coupon'
+  to: 'fmorton@base2inc.com,jwallis@visitindy.com,lneal@visitindy.com,jrobinson@visitindy.com,solutions@pranger.com'
+  from: jupiter@visitindy.com
+
+summer_contest:
+  subject: 'Summer Contest'
+  to: 'fmorton@base2inc.com,lneal@visitindy.com'
+
+publish_blog:
+  subject: 'Blog Approval Needed'
+  to: 'czetzl@visitindy.com,fmorton@base2inc.com,solutions@pranger.com'
+  from: jupiter@visitindy.com

@@ -1,0 +1,12 @@
+<% @meeting_date = @calculations_view if @meeting_date.nil?  -%>
+
+<% if @meeting_date.nil? %>
+  No access <%= request.remote_addr %>
+<% else %>
+  <%= render :partial => 'show_external' -%>
+
+  <% if (@meeting_date_economic_impact.lever_note_available rescue false) %>
+    <div style="page-break-before: always" />
+    <%= render :partial => 'show_notes' -%>
+  <% end %>
+<% end %>

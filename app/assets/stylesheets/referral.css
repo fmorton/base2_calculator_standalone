@@ -1,0 +1,77 @@
+legend { color: #fff; border: 1px #004b8b solid; background-color: #004b8b; }
+
+.gray { background-color: #f5f5f5; }
+
+
+div.section { background-color: #004b8b; border: 1px #004b8b solid; color: #fff; }
+
+legend.small { color: #333; }
+
+.well {
+  background-color: #f5f5f5;
+  border: 1px solid #d1d3d4;
+}
+
+.form-section { padding: 20px 20px 10px 20px; margin-bottom: 20px; color: inherit; border: 1px solid #d1d3d4; background-color: #ffffff;}
+.col-form-label { padding-top: 0px; font-size: 12px; font-weight: bold; margin-bottom: .5rem;}
+.margin01 { margin: 0px 0px 10px 0px; }
+
+label { font-size: 12px; font-weight: normal; }
+label.head { font-size: 14px; color: #004b8b; }
+
+.ui-autocomplete { position: absolute; cursor: default; font-size: 12px; font-weight: normal; border: 1px #E7E6E6 solid; background-color: #FFFFFF; padding-top: 3px; padding-left: 15px; text-align: left; list-style-type: none; list-style-position: inside; } 
+.ui-helper-hidden-accessible { display:none; }
+
+hr { margin: 10px 0; }
+.object-center { text-align: center; }
+
+/* MultiSelect Pulldown Styles bootstrap-select.css */
+.bootstrap-select > .btn { width: 100%; padding-right: 25px; border: 1px solid #d4d8d9; font-weight: normal; }
+.bootstrap-select > .btn:hover, .bootstrap-select > .btn:focus { background-color: #004b8b; color: #ffffff; text-decoration: none; }
+/* END MultiSelect Pulldown Styles bootstrap-select.css */
+
+h3 { line-height: 30px; font-size: 20.5px; }
+h4 { margin-bottom: 5px; margin-top: -5px; }
+h4.title { margin: 4px 0 0 0; }
+h4 small { color: #333333; }
+
+td.rt, th.rt, col.rt { text-align: right; }
+
+#tool-bar { position: fixed; top: 40px; right: 0; left: 0; -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); }
+
+.label-bar { min-height: 25px; padding: 9px; margin-bottom: 0px; }
+
+.form-actions { padding: 15px 20px 0px 20px; margin-top: 0px; margin-bottom: 0px; *zoom: 1; }
+.form-control { height: 30px; padding: 0px 6px 0px 6px; font-size: 11px; line-height: 1.19; color: #333333; background-color: #eceff0;  background-image: none;  border: 1px solid #d4d8d9; border-radius: 0; }
+.content-center { padding: 0px 0px 0px 0px; max-width: 1100px; margin: 0px auto 25px auto; }
+
+.step-title { padding: 3px 8px 3px 8px; margin-bottom: 0px; font-size: 20px; line-height: 26px; font-weight: bold; width: auto; background-color: #004b8b; }
+.step-title.small { font-size: 12px; }
+
+input, button, select, textarea {font-size: 12px; line-height: 16px; font-weight: normal; }
+
+textarea { height: auto; }
+
+.input-append input, .input-prepend input, .input-append select, .input-prepend select, .input-append .uneditable-input, .input-prepend .uneditable-input, .input-append .dropdown-menu, .input-prepend .dropdown-menu { font-size: 12px; }
+.input-append .add-on, .input-prepend .add-on { font-size: 12px; line-height: 18px; }
+input.spacer { margin-bottom: 5px; }
+
+legend + table { margin-top: 20px; -webkit-margin-top-collapse: separate; }
+
+.danger-inline { margin: 0px;}
+.alert {padding: 8px 8px 8px 8px; }
+
+.btn { font-size: 12px; line-height: 18px; }
+
+.btn-group > .btn, .btn-group > .dropdown-menu, .btn-group > .popover { font-size: 12px; }
+
+table.nav-info { background-color: transparent; border-collapse: collapse; border-spacing: 0; }
+table.nav-info th, table.nav-info td { padding: 5px; text-align: left; vertical-align: top; border-top: 1px solid #DDDDDD; }
+table.nav-info th { font-weight: bold; }
+table.nav-info thead th { vertical-align: bottom; }
+
+.oneline { display: inline; }
+
+.pagination ul > li > em.current { float: left; padding: 2px 12px; line-height: 20px; text-decoration: none; border-left-width: 0; font-style: normal; }
+.pagination ul > li > em.current, .pagination ul > li > span { color: #999999; cursor: default; }
+.pagination ul > li > em.current { background-color: #f5f5f5; }

@@ -1,0 +1,67 @@
+<%= render :partial => 'shared/error_messages', :object => @calculation %>
+
+<%= form_for @calculation, :html => { :id => 'edit_form', :multipart => true } do |f| %>
+  <%= hidden_field_tag 'secret_key', secret_key() %>
+  <%= hidden_field_tag 'edit_form_source', '' %>
+  <%= hidden_field_tag 'originating', active_navigating_originating(@active_navigation) %>
+  <%= hidden_field_tag 'active_tagmaps', MeetingDate.active_tagmap_labels %>
+  <%= hidden_field_tag 'redirect_controller', 'calculations' %>
+  <%= hidden_field_tag 'invalid_uri', '/invalid' %>
+  <% if params[:organization] -%>
+    <%= hidden_field_tag 'meeting_date[organization_id]', params[:organization] %>
+  <% end -%>
+  <% if params[:meeting] -%>
+    <%= hidden_field_tag 'meeting_date[meeting_id]', params[:meeting] %>
+  <% end -%>
+
+  <% if edit_fieldset_viewable("view_map.meeting_dates.meeting_date_essentials") %>
+    <%= edit_fieldset_start("#{event_or_meeting} Essentials") %>
+      <%= render :partial => 'meeting_date_auto_complete/organization_and_meeting', :locals => { :f => f, :meeting_date => @calculation, :organization => @organization, :add_new_support => true } %>
+
+    	<%= edit_fieldset_column_start %>
+        <%= edit_blank_line %>
+        <%= edit_string f, "Name", 'name' %>
+        <%= edit_datepicker_range f, "#{event_or_meeting} Date", 'meeting_1_at', 'meeting_1_end_at' %>
+        <%= edit_array_select(f, "Status", 'meeting_status_id', @meeting_status_values.get_verified_collection((@calculation.meeting_status_id rescue 0)), { :include_blank => '', :button => apply_button("meeting-date-essentials-anchor") }) %>
+    	<%= edit_fieldset_next_column %>
+        <%= edit_blank_line %>
+        <%= edit_no_yes f, "Shared", 'shared', :class => "form-control input-md" %>
+        <% if @economics_calculator_multi_city -%>
+          <%= edit_array_select(f, "Host City", 'host_city_id', @economics_calculator_host_cities.get_verified_collection((@calculation.host_city_id rescue 0)), :include_blank => '') %>
+				<% elsif @economics_calculator -%>
+          <%= hidden_field_tag 'meeting_date[host_city_id]', @context.context_organization.id %>
+			  <% end -%>
+        <%= edit_text f, "Date Note", 'flexible_dates_note', :rows => 5 %>
+    	<%= edit_fieldset_column_end %>
+    <%= edit_fieldset_end %>
+  <% end -%>
+
+  <% if edit_fieldset_viewable("view_map.meeting_dates.meeting_date_category") %>
+    <%= edit_fieldset_start("#{event_or_meeting} Category") %>
+    	<%= edit_fieldset_column_start_wide %>
+        <%= tagmap_checklist(@meeting_date_category, @active_tags, f) %>
+    	<%= edit_fieldset_column_end %>
+    <%= edit_fieldset_end %>
+  <% end -%>
+
+  <% if edit_fieldset_viewable("view_map.meeting_dates.room_block") %>
+    <%= edit_fieldset_start %>
+    	<%= edit_fieldset_column_start %>
+        <%= edit_datepicker_range f, "Housing Date", 'housing_1_at', 'housing_1_end_at', :button => apply_button("room-block-anchor") %>
+			<%= edit_fieldset_next_column %>
+			  <% if @economics_calculator_mode -%>
+          <%= available(view_number("Total Room Nights", @calculation.total_room_nights_blocked), 'total_room_nights_blocked') %>
+				<% else -%>
+          <%= available(edit_number(f, "Total Room Nights", 'total_room_nights_blocked'), 'total_room_nights_blocked') %>
+				<% end -%>
+        <%= available(view_number("Total Attendee Days", @calculation.total_attendance), 'total_attendance') %>
+    	<%= edit_fieldset_column_end %>
+    	<%= edit_fieldset_column_start_wide %>
+        <%= render :partial => 'meeting_dates/room_block_with_attendance', :locals => { :f => f, :meeting_date => @calculation } -%>
+    	<%= edit_fieldset_column_end %>
+    <%= edit_fieldset_end %>
+  <% end -%>
+
+  <%= render :partial => 'meeting_dates/financial_commitment', :object => @calculation_financial_commitment, :locals => { :f => f, :internal_view => true, :hotel_staff => false, :convention_center_staff => false } -%>
+  <%= render :partial => 'meeting_dates/economic_impact', :object => @calculation_economic_impact, :locals => { :f => f, :consolidate_local => true } -%>
+<% end %>

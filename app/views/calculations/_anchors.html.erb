@@ -1,0 +1,9 @@
+<% approval_string = ((@context.active_view_map.viewable_status('view_map.meeting_dates.approval')[0]) ? 'Approvals/Booking' : 'Booking') -%>
+
+<%= fieldset_anchor_link(@view_map_meeting_date_essentials, "#{event_or_meeting} Essentials", :always_show => true, :anchor => 'top-anchor', :color => navigation_color(0)) %>
+<%= fieldset_anchor_link(@view_map_meeting_date_category, "#{event_or_meeting} Category", :color => navigation_color(5)) %>
+<%= fieldset_anchor_link(@view_map_meeting_date_room_block, "Room/Attendance Block", :color => navigation_color(2)) %>
+<!-- < %= fieldset_anchor_link(@view_map_meeting_date_financial_commitments, "Financial Commitments", :color => navigation_color(4)) % > -->
+<%= fieldset_anchor_link(@view_map_meeting_date_economic_impact, "Economic Impact", :color => navigation_color(9)) %>
+
+<%= render :partial => 'meetings/all_meeting_dates' %>

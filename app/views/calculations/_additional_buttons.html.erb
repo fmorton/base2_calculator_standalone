@@ -1,0 +1,3 @@
+<% if @economics_calculator_mode && (params[:action] == 'show') -%>
+  <%= link_to "Print Graph", "/calculations_view/#{params[:id]}", :class => 'btn btn-primary ml-1', :target => '_blank' %>
+<% end -%>

@@ -1,0 +1,43 @@
+<%= view_fieldset_page_start(@active_navigation, @calculation, :name, calculation_path, edit_calculation_path(@calculation)) %>
+  <% if view_fieldset_viewable("view_map.meeting_dates.meeting_date_essentials") %>
+    <%= view_fieldset_start("#{event_or_meeting} Essentials") %>
+      <%= view_fieldset_column_start %>
+        <%= view_string "Organization/#{event_or_meeting}", [ (@organization.name rescue nil), (@meeting.name rescue nil) ].compact_blank.join(' / ') %>
+        <%= view_string "Name", @calculation.name %>
+        <%= view_datepicker_range "#{event_or_meeting} Date", @calculation.meeting_1_at, @calculation.meeting_1_end_at %>
+        <%= view_integer "Status", tagmap_cached_name(@calculation.meeting_status_id) %>
+      <%= view_fieldset_next_column %>
+        <%= view_no_yes "Shared", @calculation.shared %>
+        <% if @economics_calculator_multi_city -%>
+          <%= view_array_select("Host City", (@calculation.host_city_id rescue 0), @economics_calculator_host_cities) %>
+        <% end -%>
+        <%= view_text "Date Note", @calculation.flexible_dates_note %>
+      <%= view_fieldset_column_end %>
+    <%= view_fieldset_end %>
+  <% end -%>
+
+  <% if view_fieldset_viewable("view_map.meeting_dates.meeting_date_category") %>
+    <%= view_fieldset_start("#{event_or_meeting} Category") %>
+      <%= view_fieldset_column_start_wide %>
+        <%= tagmap_checklist(@meeting_date_category, @active_tags, nil) %>
+      <%= view_fieldset_column_end %>
+    <%= view_fieldset_end %>
+  <% end -%>
+
+  <% if view_fieldset_viewable("view_map.meeting_dates.room_block") %>
+    <%= view_fieldset_start("Room/Attendance Block") %>
+      <%= view_fieldset_column_start %>
+        <%= view_datepicker_range "Housing Date", @calculation.housing_1_at, @calculation.housing_1_end_at %>
+      <%= view_fieldset_next_column %>
+        <%= available(view_number("Total Room Nights", @calculation.total_room_nights_blocked), 'total_room_nights_blocked') %>
+        <%= available(view_number("Total Attendee Days", @calculation.total_attendance), 'total_attendance') %>
+      <%= view_fieldset_column_end %>
+      <%= view_fieldset_column_start_wide %>
+        <%= render :partial => 'meeting_dates/room_block_with_attendance', :locals => { :f => nil, :meeting_date => @calculation } -%>
+      <%= view_fieldset_column_end %>
+    <%= view_fieldset_end %>
+  <% end -%>
+
+  <%= render :partial => 'meeting_dates/financial_commitment', :object => @calculation_financial_commitment, :locals => { :internal_view => true, :hotel_staff => false, :convention_center_staff => false }  -%>
+  <%= render :partial => 'meeting_dates/economic_impact', :locals => { :economic_impact => @calculation_economic_impact, :f => nil, :consolidate_local => true } -%>
+<%= view_fieldset_page_end %>

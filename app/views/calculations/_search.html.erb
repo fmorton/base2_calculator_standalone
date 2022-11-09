@@ -1,0 +1,14 @@
+<%= search_form_tag '/calculations/index', :class => '' do %>
+	<%= search_form_extra %>
+	<div class="row">
+		<div class="col-md-6 col-sm-6">
+			<%= search_element('Organization Name', text_field_tag(:meeting_date_organization_name, @search_organization_name, :class => 'form-control')) %>
+			<%= search_date_range("#{event_or_meeting} Date", 'meeting_date_date', @search_meeting_date_date_from, @search_meeting_date_date_to) %>
+			<%= search_element("#{event_or_meeting} Status", (select_tag('meeting_date_status', options_for_select(@meeting_date_status, :selected => @search_meeting_date_status), :class => 'selectpicker form-control') rescue '')) %>
+			<%= search_element("#{event_or_meeting} Category", select_tag("meeting_date_category", options_from_collection_for_select(@meeting_date_category, :label, :name, @search_meeting_date_category), :class => 'selectpicker form-control', :include_blank => '')) %>
+		</div>
+		<div class="col-md-3 col-sm-4" style="margin-left: 10px;">
+			<%= search_buttons(new_calculation_path) %>
+		</div>
+	</div>
+<% end %>

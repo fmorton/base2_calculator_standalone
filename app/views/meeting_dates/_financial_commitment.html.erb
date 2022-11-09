@@ -1,0 +1,110 @@
+<% if (financial_commitment rescue false) %>
+  <% meeting_date_financial_commitment_form = nil -%>
+  <% if (defined?(f) ? f : nil) -%>
+    <%= nested_fields_for(f, @meeting_date, :meeting_date_financial_commitment) do |meeting_date_financial_commitment_form_value| %>
+		  <% meeting_date_financial_commitment_form = meeting_date_financial_commitment_form_value -%>&nbsp;
+	  <% end -%>
+  <% end -%>
+
+  <% if internal_view || @show_rate_considerations -%>
+	  <% if view_fieldset_viewable("view_map.meeting_dates.income") %>
+	    <%= view_fieldset_start(((internal_view) ? nil: "Rate Considerations")) %>
+	    	<%= view_fieldset_column_start_wide %>
+	        <table class="table table-striped table-bordered table-condensed">
+	        	<thead>
+							<tr>
+								<th width="20%">&nbsp;</th>
+								<th class="text-center" width="10%">Amount</th>
+								<% if internal_view -%>
+									<th class="text-center" width="10%">Forecast</th>
+								<% end -%>
+								<th>Description</th>
+							</tr>
+	        	</thead>
+	    			<tbody>
+	          <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Assessment&nbsp;($/room&nbsp;night)&nbsp;&nbsp;", "income_assessment", internal_view, true) %>
+	          <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Other&nbsp;($/peak&nbsp;rooms)", "income_other", internal_view, true) %>
+	          <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Other&nbsp;(%)", "income_other_percent", internal_view, true, 'percentage_string') %>
+	          <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Total Visit Indy Income", "income_total_inside", internal_view, true) %>
+	          <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Commission&nbsp;(%)", "income_commission", internal_view, true, 'percentage_string') %>
+	          <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Rebate&nbsp;($/room&nbsp;night)", "income_rebate", internal_view, true) %>
+	          <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Third-Party&nbsp;($/room&nbsp;night)", "income_other_outside", internal_view, true) %>
+	          <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Third-Party&nbsp;(%)", "income_other_outside_percent", internal_view, true, 'to_s') %>
+	          <% if internal_view -%>
+	            <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Total Third-Party Income", "income_total_outside", internal_view, true) %>
+	            <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Total Income", "income_total", internal_view, true) %>
+	          <% end -%>
+	    			</tbody>
+	        </table>
+	    	<%= view_fieldset_column_end %>
+	    <%= view_fieldset_end %>
+	  <% end -%>
+  <% end -%>
+
+  <% if internal_view || ((convention_center_staff) && (view_economics_show_convention_center_expenses?(financial_commitment))) -%>
+	  <% if view_fieldset_viewable("view_map.meeting_dates.expense") %>
+	    <%= view_fieldset_start((internal_view) ? nil: "Financial Commitment") %>
+	    	<%= view_fieldset_column_start_wide %>
+	        <table class="table table-striped table-bordered table-condensed">
+	        	<thead>
+							<tr>
+	              <th width="20%">&nbsp;</th>
+	              <th class="text-center" width="10%">Expense</th>
+	              <th class="text-center">Description</th>
+							</tr>
+	        	</thead>
+	    			<tbody>
+              <% if internal_view -%>
+		            <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "ICCLOS Rental or Other Venue ($)&nbsp;&nbsp;", "expense_space", internal_view, false) %>
+		            <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Transportation ($)", "expense_transportation", internal_view, false) %>
+		            <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Sponsorship/Food/Beverage ($)", "expense_sponsor_food", internal_view, false) %>
+		            <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Cash ($)", "expense_cash", internal_view, false) %>
+		            <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "Other ($)", "expense_other", internal_view, false) %>
+		            <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "&nbsp;&nbsp;&nbsp;Visit Indy Expense Total ($)", "expense_total_inside", internal_view, false) %>
+							<% end -%>
+	            <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "ICCLOS&nbsp;Rental ($)", "expense_other_outside", internal_view, false) %>
+							<% if internal_view -%>
+	              <%= edit_view_economics_income_expense(meeting_date_financial_commitment_form, financial_commitment, "&nbsp;&nbsp;&nbsp;Total Including Third-Party ($)", "expense_total", internal_view, false) %>
+							<% end -%>
+						</tbody>
+					</table>
+
+         <% if (meeting_date_financial_commitment_form rescue false) -%>
+           <%= edit_text meeting_date_financial_commitment_form, "ICCLOS Financial Commitment Notes", 'financial_commitment_note', :rows => 7, :label_above => true %>
+				 <% else -%>
+	         <%= view_text_with_line_endings "ICCLOS Financial Commitment Notes", financial_commitment.financial_commitment_note, :label_above => true, :boxed => true %>
+				 <% end -%>
+	    	<%= view_fieldset_column_end %>
+	    <%= view_fieldset_end %>
+	  <% end -%>
+  <% end -%>
+
+  <% if view_fieldset_viewable("view_map.meeting_dates.financial_commitment") && internal_view %>
+    <%= view_fieldset_start %>
+    	<%= view_fieldset_column_start_wide %>
+        <table class="table table-striped table-bordered table-condensed">
+        	<thead>
+						<tr>
+							<th>&nbsp;</th>
+							<th class="text-center">Forecast</th>
+						</tr>
+        	</thead>
+    			<tbody>
+						<tr>
+							<td>Total Visit Indy Income (Reflecting 70% Collection Factor)&nbsp;&nbsp;</td>
+							<td><%= financial_commitment.income_total_inside_discounted.dollars_with_commas %></td>
+						</tr>
+						<tr>
+							<td>Total Visit Indy Expenses</td>
+							<td><%= financial_commitment.expense_total_inside.dollars_with_commas %></td>
+						</tr>
+						<tr>
+							<td>&nbsp;&nbsp;&nbsp;Net Income</td>
+							<td><%= financial_commitment.financial_commitment_forecast.dollars_with_commas %></td>
+						</tr>
+    			</tbody>
+        </table>
+    	<%= view_fieldset_column_end %>
+    <%= view_fieldset_end %>
+  <% end -%>
+<% end -%>

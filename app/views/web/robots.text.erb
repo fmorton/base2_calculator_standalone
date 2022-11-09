@@ -1,0 +1,12 @@
+User-Agent: *
+<% if request.host.downcase.index("visitindy.com") && !(request.host.downcase.index("jupiter")) && !(request.host.downcase.index("tourismmasterplan")) -%>
+Disallow: /home
+Disallow: /smiley
+Disallow: /logon
+Disallow: /web_ajax
+Disallow: /web_blog_contents
+Disallow: /web_blog_media
+Allow: /
+<% else -%>
+Disallow: /
+<% end -%>

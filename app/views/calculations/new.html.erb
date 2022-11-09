@@ -1,0 +1,3 @@
+<%= edit_fieldset_page_start(@active_navigation, @calculation, :name, calculations_path, nil) %>
+  <%= render :partial => 'form', :object => @calculation, :locals => { :edit => false } %>
+<%= edit_fieldset_page_end %>

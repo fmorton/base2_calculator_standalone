@@ -1,0 +1,20 @@
+<div class="row">
+	<div class="col-md-12">
+		<ul class="list-inline">
+		  <% @browser_contents.each do |browser_content| -%>
+  		  <% image_uri = browser_content.image_uri -%>
+  		  <% image_name = File.basename(image_uri) -%>
+  		  <% image_date = browser_content.created_at.standard_date -%>
+      	<li>
+      		<div class="thumbnail">
+      			<a href="javascript://" class="thumbnail js-image-link" data-url="<%= image_uri %>"><img src="<%= image_uri %>"></a>
+      			<div class="caption">
+      				<p><a href="javascript://" class="js-image-link" data-url="<%= image_uri %>"><%= image_name %></a></p>
+      				<p><%= image_date %></p>
+      			</div>
+      		</div>
+      	</li>
+		  <% end -%>
+		</ul>
+	</div>
+</div>
