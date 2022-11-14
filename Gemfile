@@ -95,6 +95,7 @@ gem "dalli"
 gem "fuzzy-string-match_pure", :require => "fuzzystringmatch"
 gem "geoip"
 gem "geokit"
+gem 'google-apis-gmail_v1'
 gem "hiredis"
 gem "jquery-rails"
 gem "legato"

@@ -1,7 +1,7 @@
 GEM
   remote: https://6ZGePChzyPwWEfQbSF7R@gem.fury.io/fmorton/
   specs:
-    base2_cms (2.30.18)
+    base2_cms (2.30.19)
       bcrypt
       encryptor
       fuzzy-string-match_pure
@@ -102,8 +102,8 @@ GEM
     ar_outer_joins (0.2.0)
       activerecord (>= 3.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.658.0)
-    aws-sdk-core (3.166.0)
+    aws-partitions (1.660.0)
+    aws-sdk-core (3.167.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -140,6 +140,7 @@ GEM
     debug (1.6.3)
       irb (>= 1.3.6)
       reline (>= 0.3.1)
+    declarative (0.0.20)
     dimensions (1.3.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -167,6 +168,24 @@ GEM
     geokit (1.13.1)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    google-apis-core (0.9.1)
+      addressable (~> 2.5, >= 2.5.1)
+      googleauth (>= 0.16.2, < 2.a)
+      httpclient (>= 2.8.1, < 3.a)
+      mini_mime (~> 1.0)
+      representable (~> 3.0)
+      retriable (>= 2.0, < 4.a)
+      rexml
+      webrick
+    google-apis-gmail_v1 (0.20.0)
+      google-apis-core (>= 0.9.1, < 2.a)
+    googleauth (1.3.0)
+      faraday (>= 0.17.3, < 3.a)
+      jwt (>= 1.4, < 3.0)
+      memoist (~> 0.16)
+      multi_json (~> 1.11)
+      os (>= 0.9, < 2.0)
+      signet (>= 0.16, < 2.a)
     gyoku (1.4.0)
       builder (>= 2.1.2)
       rexml (~> 3.0)
@@ -184,6 +203,7 @@ GEM
     http-parser (1.2.3)
       ffi-compiler (>= 1.0, < 2.0)
     http_parser.rb (0.6.0)
+    httpclient (2.8.3)
     httpi (3.0.1)
       rack
     i18n (1.12.0)
@@ -200,7 +220,7 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jmespath (1.6.1)
-    jquery-rails (4.5.0)
+    jquery-rails (4.5.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
@@ -215,6 +235,7 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
     matrix (0.4.2)
+    memoist (0.16.2)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (1.0.0)
@@ -254,6 +275,7 @@ GEM
       version_gem (~> 1.1)
     oj (3.13.23)
     options (2.3.2)
+    os (1.1.4)
     pg (1.3.5)
     pg_search (2.3.6)
       activerecord (>= 5.2)
@@ -304,6 +326,11 @@ GEM
     regexp_parser (2.6.0)
     reline (0.3.1)
       io-console (~> 0.5)
+    representable (3.2.0)
+      declarative (< 0.1.0)
+      trailblazer-option (>= 0.1.1, < 0.2.0)
+      uber (< 0.2.0)
+    retriable (3.1.2)
     reversible_cryptography (0.5.0)
       thor
     rexml (3.2.5)
@@ -353,6 +380,7 @@ GEM
     thor (1.2.1)
     thread_safe (0.3.6)
     timeout (0.3.0)
+    trailblazer-option (0.1.2)
     turbo-rails (1.3.2)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
@@ -373,6 +401,7 @@ GEM
       unf (~> 0.1.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
+    uber (0.1.0)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
@@ -391,6 +420,7 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0)
+    webrick (1.7.0)
     websocket (1.2.9)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
@@ -425,6 +455,7 @@ DEPENDENCIES
   fuzzy-string-match_pure
   geoip
   geokit
+  google-apis-gmail_v1
   hiredis
   iconv
   importmap-rails
