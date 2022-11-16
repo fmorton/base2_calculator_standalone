@@ -1,7 +1,7 @@
 GEM
   remote: https://6ZGePChzyPwWEfQbSF7R@gem.fury.io/fmorton/
   specs:
-    base2_cms (2.30.25)
+    base2_cms (2.30.26)
       bcrypt
       encryptor
       fuzzy-string-match_pure
@@ -102,7 +102,7 @@ GEM
     ar_outer_joins (0.2.0)
       activerecord (>= 3.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.660.0)
+    aws-partitions (1.661.0)
     aws-sdk-core (3.167.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -209,7 +209,7 @@ GEM
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     iconv (1.0.8)
-    idn-ruby (0.1.4)
+    idn-ruby (0.1.5)
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -260,7 +260,7 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
-    newrelic_rpm (8.12.0)
+    newrelic_rpm (8.13.0)
     nio4r (2.5.8)
     nokogiri (1.13.9)
       mini_portile2 (~> 2.8.0)
