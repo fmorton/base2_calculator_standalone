@@ -1,0 +1,4 @@
+<%= edit_fieldset_column_start %>
+  <%= edit_string_view_only "Assigned Organization", (link_to(@organization.name, @organization) rescue nil) %>
+  <%= hidden_field_tag 'meeting_date[organization_id]', (@organization.id rescue nil) %>
+<%= edit_fieldset_column_end %>

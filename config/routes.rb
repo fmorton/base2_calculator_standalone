@@ -1,4 +1,43 @@
 Base2Calculator::Application.routes.draw do
+  resources :calculations do
+    member do
+      get :copy
+      get :excel
+    end
+  end
+  resources :error
+  resources :home do
+    collection do
+      get :deferred_uri
+    end
+  end
+  resources :logon do
+    member do
+      get :multi
+    end
+  end
+  resources :meeting_dates, controller: 'calculations'
+  resources :organizations do
+    member do
+      delete :remove_content
+      delete :remove_event
+      delete :remove_parent_organization
+      get :copy, :to => 'organizations#copy'
+    end
+    collection do
+      get :add_sport_facility_render
+      get :delete_sport_facility_render
+    end
+  end
+  resources :people do
+    member do
+      delete :remove_organization
+      post :add_organization
+    end
+  end
+end
+=begin
+  DEBUG
   resources :archives do
     member do
       get :restore
@@ -28,7 +67,6 @@ Base2Calculator::Application.routes.draw do
   resources :context_organization_view_maps
   resources :context_organization_context_view_maps
   resources :email_queues
-  resources :error
   resources :event_date_patterns
   resources :event_content_connections_select
   resources :event_venue_select
@@ -43,11 +81,6 @@ Base2Calculator::Application.routes.draw do
   end
   resources :followup
   resources :help
-  resources :home do
-    collection do
-      get :deferred_uri
-    end
-  end
   resources :invalid
   resources :list_makers do
     collection do
@@ -56,11 +89,6 @@ Base2Calculator::Application.routes.draw do
     end
   end
   resources :logoff
-  resources :logon do
-    member do
-      get :multi
-    end
-  end
   resources :new_design
   resources :notes do
     member do
@@ -72,12 +100,6 @@ Base2Calculator::Application.routes.draw do
     end
   end
   resources :organization_content_connections_select
-  resources :people do
-    member do
-      delete :remove_organization
-      post :add_organization
-    end
-  end
   resources :people_convention_sales_goals
   resources :people_notes
   resources :people_notes_resources
@@ -135,26 +157,8 @@ Base2Calculator::Application.routes.draw do
   end
   resources :wysiwyg_images
 
-  resources :organizations do
-    member do
-      delete :remove_content
-      delete :remove_event
-      delete :remove_parent_organization
-      get :copy, :to => 'organizations#copy'
-    end
-    collection do
-      get :add_sport_facility_render
-      get :delete_sport_facility_render
-    end
-  end
 
   resources :approvals
-  resources :calculations do
-    member do
-      get :copy
-      get :excel
-    end
-  end
   resources :calculations_view
   resources :coupons
   resources :dashboard
@@ -284,3 +288,4 @@ Base2Calculator::Application.routes.draw do
 
   get '/' => "web#index"
 end
+=end

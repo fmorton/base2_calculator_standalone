@@ -1,0 +1,22 @@
+<% add_new_support = (add_new_support rescue true) -%>
+<% if can_see?(Constant::TAGMAP_LABEL_PRIVILEGE_CALCULATIONS) || (can_see?(Constant::TAGMAP_LABEL_PRIVILEGE_ORGANIZATIONS) && can_see?(Constant::TAGMAP_LABEL_PRIVILEGE_MEETINGS)) -%>
+  <%= edit_fieldset_column_start %>
+    <%= edit_string_auto_complete "Find Organization", 'auto_complete_organization_and_meeting' %>
+		<% if add_new_support -%>
+		  <%= edit_string_tag "OR Add Organization", 'new_organization_name', '' %>
+		<% end -%>
+    <br />
+  <%= edit_fieldset_next_column %>
+    <div id="organization_and_meeting_select_render">
+      <%= render :partial => 'meeting_date_auto_complete/organization_and_meeting_select_render', :locals => { :meeting_date => meeting_date, :organization => organization } %>
+    </div>
+		<% if add_new_support -%>
+		  <%= edit_string_tag "OR Add #{event_or_meeting}", 'new_meeting_name', '' %>
+		<% end -%>
+  <%= edit_fieldset_column_end %>
+
+  <div id="organization_and_meeting_render">
+    <%= render :partial => 'meeting_date_auto_complete/organization_and_meeting_render', :locals => { :meeting_date => meeting_date, :organization => organization } %>
+  </div>
+<% end -%>
+

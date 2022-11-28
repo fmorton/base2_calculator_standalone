@@ -1,0 +1,2 @@
+$('#organization_and_meeting_select_render').html("<%= escape_javascript(render(:partial => 'meeting_date_auto_complete/organization_and_meeting_select_render', :formats => [ :html ], :locals => { :meeting_date => @meeting_date })) %>")
+$('#organization_and_meeting_render').html("<%= escape_javascript(render(:partial => 'meeting_date_auto_complete/organization_and_meeting_render', :formats => [ :html ], :locals => { :meeting_date => @meeting_date, :organization => @organization })) %>")
