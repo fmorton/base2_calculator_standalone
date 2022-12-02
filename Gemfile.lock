@@ -1,7 +1,7 @@
 GEM
   remote: https://6ZGePChzyPwWEfQbSF7R@gem.fury.io/fmorton/
   specs:
-    base2_cms (2.31.11)
+    base2_cms (2.31.12)
       bcrypt
       encryptor
       fuzzy-string-match_pure
