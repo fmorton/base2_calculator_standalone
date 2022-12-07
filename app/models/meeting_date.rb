@@ -37,11 +37,11 @@ class MeetingDate < ActiveRecord::Base
   after_commit      :sync_bedded_rooms_percentages
   after_commit      :sync_peak_rooms_committed
 
-  belongs_to        :context_organization
-  belongs_to        :contact, :class_name => 'Person'
-  belongs_to        :meeting
-  belongs_to        :organization
-  belongs_to        :sales_manager, :class_name => 'Person', :foreign_key => :sales_manager_id
+  belongs_to        :context_organization, :optional => true
+  belongs_to        :contact, :class_name => 'Person', :optional => true
+  belongs_to        :meeting, :optional => true
+  belongs_to        :organization, :optional => true
+  belongs_to        :sales_manager, :class_name => 'Person', :foreign_key => :sales_manager_id, :optional => true
   has_many          :convention_center_attachments, -> { where('attachments.attachment_type' => Attachment::CONVENTION_CENTER_ATTACHMENT_TYPE) }, :as => :parent_object, :class_name => 'Attachment', :dependent => :destroy
   has_many          :attendance_block, -> { where(:room_flow_type => MeetingDateRoomFlow::ROOM_FLOW_TYPE_ATTENDANCE).order(:position) }, :class_name => 'MeetingDateRoomFlow', :dependent => :destroy
   has_many          :hotel_viewable_notes, -> { where(:hotel_viewable => true).order("notes.note_at desc,notes.id desc") }, :class_name => 'Note'

@@ -19,8 +19,8 @@ class MeetingDateEconomicImpact < ActiveRecord::Base
   SOCIAL_SECURITY_AND_OTHER_TAXES = 11
   MAX_TAX = 20
 
-  belongs_to :context_organization
-  belongs_to :meeting_date
+  belongs_to :context_organization, :optional => true
+  belongs_to :meeting_date, :optional => true
 
   def context_before_validation_application_extra
     self.attendance_nights = 0 if self.attendance_nights.nil?

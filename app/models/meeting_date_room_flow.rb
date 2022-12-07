@@ -24,8 +24,8 @@ class MeetingDateRoomFlow < ActiveRecord::Base
   ROOM_FLOW_TYPE_BLOCKED = 'B'
   ROOM_FLOW_TYPE_PICK_UP = 'P'
 
-  belongs_to :context_organization
-  belongs_to :meeting_date
+  belongs_to :context_organization, :optional => true
+  belongs_to :meeting_date, :optional => true
 
   scope :rooms_attendance_type, -> { where("room_flow_type='#{ROOM_FLOW_TYPE_ATTENDANCE}'") }
   scope :rooms_blocked_type, -> { where("room_flow_type='#{ROOM_FLOW_TYPE_BLOCKED}'") }

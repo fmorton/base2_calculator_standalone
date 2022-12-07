@@ -7,8 +7,8 @@ class MeetingDateStatusLog < ActiveRecord::Base
   include Base2ChangeLogModel
   include Base2ArchiveModel
 
-  belongs_to :context_organization
-  belongs_to :meeting_date
+  belongs_to :context_organization, :optional => true
+  belongs_to :meeting_date, :optional => true
 
   def context_before_validation_application_extra
     self.data_source_id = 0 if self.data_source_id.nil?

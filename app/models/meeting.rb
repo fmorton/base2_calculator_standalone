@@ -12,8 +12,8 @@ class Meeting < ActiveRecord::Base
   include Base2TaggedModel
   include MeetingConstants
 
-  belongs_to :context_organization
-  belongs_to :organization
+  belongs_to :context_organization, :optional => true
+  belongs_to :organization, :optional => true
   has_many   :meeting_qualifications, :dependent => :destroy
   has_many   :notes
   has_many   :meeting_dates, :dependent => :destroy
