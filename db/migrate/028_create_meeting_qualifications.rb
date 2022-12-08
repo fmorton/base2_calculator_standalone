@@ -1,4 +1,4 @@
-class CreateMeetingQualifications < ActiveRecord::Migration
+class CreateMeetingQualifications < ActiveRecord::Migration[7.0]
   def change
     create_table :meeting_qualifications do |t|
       t.integer  "context_organization_id", :default => 0, :null => false
