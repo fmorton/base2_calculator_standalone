@@ -1,7 +1,7 @@
 GEM
   remote: https://6ZGePChzyPwWEfQbSF7R@gem.fury.io/fmorton/
   specs:
-    base2_cms (2.32.5)
+    base2_cms (2.32.6)
       bcrypt
       encryptor
       fuzzy-string-match_pure
@@ -261,7 +261,7 @@ GEM
       net-protocol
     newrelic_rpm (8.13.1)
     nio4r (2.5.8)
-    nokogiri (1.13.9)
+    nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     nori (2.6.0)
