@@ -1,7 +1,7 @@
 GEM
   remote: https://6ZGePChzyPwWEfQbSF7R@gem.fury.io/fmorton/
   specs:
-    base2_cms (2.32.8)
+    base2_cms (2.32.9)
       bcrypt
       encryptor
       fuzzy-string-match_pure
@@ -134,6 +134,7 @@ GEM
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     dalli (3.2.3)
+    date (3.3.0)
     debug (1.7.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
@@ -251,7 +252,8 @@ GEM
     naught (1.1.0)
     net-http (0.3.1)
       uri
-    net-imap (0.3.1)
+    net-imap (0.3.2)
+      date
       net-protocol
     net-pop (0.1.2)
       net-protocol
