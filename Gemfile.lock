@@ -1,7 +1,7 @@
 GEM
   remote: https://6ZGePChzyPwWEfQbSF7R@gem.fury.io/fmorton/
   specs:
-    base2_cms (2.32.10)
+    base2_cms (2.32.11)
       bcrypt
       encryptor
       fuzzy-string-match_pure
@@ -134,7 +134,7 @@ GEM
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     dalli (3.2.3)
-    date (3.3.0)
+    date (3.3.1)
     debug (1.7.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
@@ -212,7 +212,7 @@ GEM
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.5.11)
-    irb (1.5.1)
+    irb (1.6.0)
       reline (>= 0.3.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
