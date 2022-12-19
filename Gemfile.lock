@@ -1,7 +1,7 @@
 GEM
   remote: https://6ZGePChzyPwWEfQbSF7R@gem.fury.io/fmorton/
   specs:
-    base2_cms (2.33.1)
+    base2_cms (2.33.2)
       bcrypt
       encryptor
       fuzzy-string-match_pure
@@ -102,7 +102,7 @@ GEM
     ar_outer_joins (0.2.0)
       activerecord (>= 3.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.677.0)
+    aws-partitions (1.680.0)
     aws-sdk-core (3.168.4)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -134,7 +134,7 @@ GEM
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     dalli (3.2.3)
-    date (3.3.1)
+    date (3.3.3)
     debug (1.7.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
@@ -211,7 +211,7 @@ GEM
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
-    io-console (0.5.11)
+    io-console (0.6.0)
     irb (1.6.1)
       reline (>= 0.3.0)
     jbuilder (2.11.5)
@@ -250,7 +250,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.2.3)
     naught (1.1.0)
-    net-http (0.3.1)
+    net-http (0.3.2)
       uri
     net-imap (0.3.2)
       date
@@ -339,7 +339,7 @@ GEM
       builder (>= 2.1.2)
       faraday (>= 0.9, < 3, != 2.0.0)
     rubyzip (2.3.2)
-    savon (2.13.1)
+    savon (2.14.0)
       akami (~> 1.2)
       builder (>= 2.1.2)
       gyoku (~> 1.2)

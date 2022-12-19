@@ -84,7 +84,6 @@ source "https://6ZGePChzyPwWEfQbSF7R@gem.fury.io/fmorton/" do
   gem "base2_cms"
   gem "base2_email_subscriber"
   gem "base2_expedia_v3"
-  #DEBUG: gem "base2_cvb"
   gem "base2_image"
 end
 
