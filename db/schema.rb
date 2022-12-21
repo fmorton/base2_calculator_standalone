@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2021_08_16_145230) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_08_231803) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -365,6 +365,10 @@ ActiveRecord::Schema[7.0].define(version: 2021_08_16_145230) do
     t.text "yelp_fusion_client_id"
     t.text "yelp_fusion_api_key"
     t.text "email_block_list"
+    t.integer "sign_up_by", default: 0, null: false
+    t.string "sign_up_email"
+    t.datetime "sign_up_start_at"
+    t.datetime "sign_up_end_at"
   end
 
   create_table "convention_sales_goals", id: :serial, force: :cascade do |t|
