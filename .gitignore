@@ -27,3 +27,5 @@ vendor/bundle
 config/secure.yml
 
 .DS_Store
+
+coverage
