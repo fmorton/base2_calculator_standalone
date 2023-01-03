@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------------------------------------------------------------
-# Copyright (c) 2008-2022 Base2 Incorporated--All Rights Reserved.
+# Copyright (c) 2008-2023 Base2 Incorporated--All Rights Reserved.
 #-----------------------------------------------------------------------------------------------------------------------------------
 #DEBUG: Dir.foreach("#{Base2Cvb::Engine.root}/lib/models") do |filename|
 #DEBUG:   next if filename == 'constant.rb'

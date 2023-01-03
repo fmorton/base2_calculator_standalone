@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------------------------------------------------------------
-# Copyright (c) 2008-2022 Base2 Incorporated--All Rights Reserved.
+# Copyright (c) 2008-2023 Base2 Incorporated--All Rights Reserved.
 #-----------------------------------------------------------------------------------------------------------------------------------
 #require_dependency "#{Rails.root}/../../lib/models/constant"
 require_dependency "#{Base2Cms::Engine.root}/lib/base2_cms/base2_tagged_controller"
