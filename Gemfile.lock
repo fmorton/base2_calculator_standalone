@@ -102,7 +102,7 @@ GEM
     ar_outer_joins (0.2.0)
       activerecord (>= 3.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.687.0)
+    aws-partitions (1.688.0)
     aws-sdk-core (3.168.4)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -505,7 +505,7 @@ DEPENDENCIES
   yelp
 
 RUBY VERSION
-   ruby 3.1.2p20
+   ruby 3.1.3p185
 
 BUNDLED WITH
    2.3.14
